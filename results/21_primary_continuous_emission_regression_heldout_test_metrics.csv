@@ -1,0 +1,3 @@
+cohort,model,selected_model,mae_kg_co2,rmse_kg_co2,median_absolute_error_kg_co2,r2,r2_original_kg_co2_scale,r2_log1p_scale,normalized_mae_percent_of_test_mean,spearman_r
+primary_temporal_shape_regression,Dummy mean baseline,False,82.89118846081215,170.72297756720957,60.96687204902962,-0.011435774681718192,-0.011435774681718192,-0.423171272803186,78.37974721032158,
+primary_temporal_shape_regression,Histogram Gradient Boosting Regressor,True,46.26371101532736,131.78089828748784,22.41399999917805,0.3973581542640986,0.3973581542640986,0.41842546655435453,43.745759250478486,0.607183580995297

@@ -1,0 +1,88 @@
+# Smart-meter thesis research portfolio — conservative public-draft exclusions
+# This file helps prevent accidental staging; it is NOT a privacy/security audit.
+
+# Python, Jupyter, and local development environments
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.cache/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Credentials, local configuration, and logs
+.env
+.env.*
+*.pem
+*.key
+*credentials*
+*secrets*
+*.log
+
+# Private/raw inputs, generated exports, and local output directories
+**/data/
+**/raw/
+**/private/
+**/output/
+**/outputs/
+**/artifacts/
+**/checkpoints/
+**/wave_1/
+**/wave_2/
+**/wave_3/
+**/Master_Pipeline_Outputs/
+**/carbon_sixhour_xai_outputs/
+
+# Serialized model artifacts and other nonreviewed binary files
+*.joblib
+*.pkl
+*.pickle
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+*.zip
+*.7z
+*.rar
+*.db
+*.sqlite
+*.sqlite3
+*.parquet
+*.feather
+*.arrow
+*.xlsx
+*.xls
+*.pdf
+*.docx
+
+# Deny spreadsheet-like exports unless explicitly reviewed below.
+*.csv
+!/results/21_primary_continuous_emission_regression_heldout_test_metrics.csv
+!/results/22_secondary_high_emission_classification_heldout_test_metrics.csv
+!/results/monthly_feature_medians_by_locked_cluster.csv
+!/results/monthly_feature_trend_tests_FDR_corrected.csv
+
+# Deny JSON files unless they are the approved documentation files below.
+*.json
+!/models/PHASE3_final_model_metadata.json
+!/models/FINAL_model_metadata.json
+!/models/BILLING_ARCHETYPE_model_metadata.json
+
+# Deny other images unless they are the two curated figures.
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.tif
+*.tiff
+!/figures/fig_load_profiles_color.png
+!/figures/cluster_feature_heatmap.png

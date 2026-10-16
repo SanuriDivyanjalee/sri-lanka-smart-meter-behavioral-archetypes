@@ -1,0 +1,110 @@
+{
+  "created_by_notebook": "Household Electricity Carbon XAI final workflow",
+  "study_period": "May-November 2024",
+  "primary_cross_month_max_gap_hours": 48.0,
+  "minimum_valid_full_months_per_household": 5,
+  "cohort_rule": "At least five quality-passing full months within May-November, with early- and late-window representation",
+  "emission_factor_kg_co2_per_kwh": 0.71,
+  "regression_target": "mean_monthly_emissions_kg = mean_monthly_kwh * 0.71",
+  "classification_target": "mean_monthly_emissions_kg at or above the development-set Q75 threshold",
+  "locked_high_emission_threshold_kg": 115.02871577152538,
+  "locked_high_emission_threshold_kwh": 162.0122757345428,
+  "locked_classification_decision_threshold": 0.20999999999999996,
+  "feature_columns": [
+    "evening_peak_ratio",
+    "night_baseload_ratio",
+    "load_uniformity",
+    "load_factor",
+    "leisure_usage_ratio"
+  ],
+  "teacher_aligned_feature_columns": [
+    "evening_peak_ratio",
+    "night_baseload_ratio",
+    "load_uniformity",
+    "load_factor",
+    "leisure_usage_ratio",
+    "n_members",
+    "mean_age",
+    "floor_area",
+    "total_monthly_expenditure_of_last_month",
+    "n_acs",
+    "n_appliances",
+    "avg_hours_home",
+    "occupant_density"
+  ],
+  "teacher_household_variables": [
+    "n_members",
+    "mean_age",
+    "floor_area",
+    "total_monthly_expenditure_of_last_month",
+    "n_acs",
+    "n_appliances",
+    "avg_hours_home",
+    "occupant_density"
+  ],
+  "teacher_variable_units": {
+    "n_members": "household members",
+    "mean_age": "years",
+    "floor_area": "square feet as recorded in Wave 1",
+    "total_monthly_expenditure_of_last_month": "survey-reported monthly expenditure",
+    "n_acs": "number of AC units in the Wave 1 AC roster",
+    "n_appliances": "number of appliance records in the Wave 1 appliance roster",
+    "avg_hours_home": "mean member hours at home during the previous week",
+    "occupant_density": "household members per 1,000 square feet"
+  },
+  "teacher_aligned_matched_households": 837,
+  "teacher_code_variables_intentionally_excluded": {
+    "avg_monthly_kwh": "directly constructs the carbon target",
+    "avg_log_daily_kwh": "closely encodes current-period target magnitude",
+    "final_cluster": "derived from the temporal features and not an independent household predictor"
+  },
+  "excluded_direct_target_terms": [
+    "consumption",
+    "kwh",
+    "emission",
+    "carbon",
+    "log_daily",
+    "final_cluster",
+    "cluster_name",
+    "archetype",
+    "coverage",
+    "target",
+    "high_emission"
+  ],
+  "selected_regression_model": "Histogram Gradient Boosting Regressor",
+  "selected_regression_best_params": {
+    "model__l2_regularization": 1.0,
+    "model__learning_rate": 0.05,
+    "model__loss": "absolute_error",
+    "model__max_leaf_nodes": 15,
+    "model__min_samples_leaf": 10
+  },
+  "selected_classification_model": "Random Forest",
+  "selected_classification_best_params": {
+    "model__class_weight": null,
+    "model__max_depth": 6,
+    "model__max_features": 1.0,
+    "model__min_samples_leaf": 8
+  },
+  "selection_rules": {
+    "regression": "lowest honest nested development OOF MAE; RMSE then R2 tie-break",
+    "classification": "highest honest nested development OOF PR-AUC; nested OOF balanced accuracy then F1 tie-break",
+    "classification_decision_threshold": "maximized balanced accuracy using honest nested development OOF probabilities"
+  },
+  "nested_cv": {
+    "primary_outer_splits": 5,
+    "primary_inner_splits": 4,
+    "final_tuning_splits": 5,
+    "classification_outer_split_strategy": "shuffled KFold independent of global target labels",
+    "classification_outer_target": "outer-training Q75",
+    "classification_inner_target": "inner-training Q75"
+  },
+  "split_stability_seeds": [
+    17,
+    42,
+    73
+  ],
+  "deployment_ready": false,
+  "artifact_status": "saved research prototype",
+  "evaluation_scope": "Internal household-level held-out test; cross-sectional, not future forecasting"
+}

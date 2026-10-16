@@ -1,0 +1,12 @@
+# Shared requirements for both Streamlit applications
+# Recommended: Python 3.11
+
+streamlit>=1.40,<2
+pandas>=2.2,<4
+numpy>=1.26,<3
+scipy>=1.11,<2
+scikit-learn>=1.4,<2
+joblib>=1.4,<2
+plotly>=5.20,<7
+holidays>=0.50,<1
+shap>=0.46,<1

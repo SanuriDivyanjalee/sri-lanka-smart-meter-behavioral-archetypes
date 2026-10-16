@@ -1,0 +1,95 @@
+{
+    "created_utc": "2026-09-12T07:15:44.355224+00:00",
+    "python_version": "3.11.8",
+    "pandas_version": "3.0.5",
+    "numpy_version": "2.4.6",
+    "scikit_learn_version": "1.4.2",
+    "joblib_version": "1.5.1",
+    "workflow_id": "Extended reduced | Random Forest | Balanced class weighting",
+    "feature_set": "Extended reduced",
+    "model_family": "Random Forest",
+    "parameters": {
+        "model__ccp_alpha": 0.001,
+        "model__max_depth": 6,
+        "model__max_features": "sqrt",
+        "model__max_samples": 0.8,
+        "model__min_samples_leaf": 10,
+        "model__min_samples_split": 20
+    },
+    "feature_count": 32,
+    "training_households": 1146,
+    "class_counts": {
+        "Peak-Exposed": 73,
+        "Typical Household": 809,
+        "Heavy Continuous": 243,
+        "Daytime-Active": 21
+    },
+    "input_hashes": {
+        "clean_fm_clusters.pkl": "b169de28b8fbc8940cd4f372db5be92b7c29b4a47eacc57f1716ea42418595db",
+        "monthly_consumption.csv": "3453dcf06b584582392b002a2f583fc3bca7d388d2bbaec8b825dcc264992906"
+    },
+    "adaptive_nested_oof_performance": {
+        "evaluation": "Primary nested out-of-fold",
+        "accuracy": 0.6823734729493892,
+        "balanced_accuracy": 0.5225549939263432,
+        "macro_f1": 0.47266037212743994,
+        "weighted_f1": 0.7023989491669178,
+        "top_2_accuracy": 0.9389179755671903,
+        "multiclass_log_loss": 0.8531050416795297,
+        "multiclass_brier_sum": 0.46796275756048383
+    },
+    "adaptive_nested_oof_class_performance": [
+        {
+            "class_name": "Peak-Exposed",
+            "precision": 0.24528301886792453,
+            "recall": 0.5342465753424658,
+            "f1_score": 0.33620689655172414,
+            "support": 73
+        },
+        {
+            "class_name": "Typical Household",
+            "precision": 0.8410404624277457,
+            "recall": 0.7194066749072929,
+            "f1_score": 0.7754830113257828,
+            "support": 809
+        },
+        {
+            "class_name": "Heavy Continuous",
+            "precision": 0.5880149812734082,
+            "recall": 0.6460905349794238,
+            "f1_score": 0.615686274509804,
+            "support": 243
+        },
+        {
+            "class_name": "Daytime-Active",
+            "precision": 0.14285714285714285,
+            "recall": 0.19047619047619047,
+            "f1_score": 0.16326530612244897,
+            "support": 21
+        }
+    ],
+    "fixed_workflow_selection_performance": {
+        "source": "Step 9 repeated stratified cross-validation used for fixed-workflow selection",
+        "macro_f1": 0.4811765082336967,
+        "balanced_accuracy": 0.5359152781885701,
+        "accuracy": 0.6771217011581547,
+        "status": "Secondary post-selection internal estimate; not an independent unbiased estimate for the fitted prototype."
+    },
+    "performance_attribution": {
+        "step4_metrics_apply_to": "Adaptive nested workflow-selection procedure",
+        "step4_metrics_do_not_apply_directly_to": "The exact fixed prototype fitted on all matched households",
+        "exact_fixed_prototype_independent_performance_available": false
+    },
+    "limitations": [
+        "The target consists of K-Means pseudo-labels rather than external ground truth.",
+        "Only 1,146 of 2,227 locked households matched the monthly billing data.",
+        "Monthly billing match coverage differs significantly by archetype.",
+        "Daytime-Active has 21 matched households.",
+        "Monthly totals cannot directly observe time-of-use behaviour.",
+        "The all-available billing predictors overlap the smart-meter label period and therefore represent contemporaneous transfer rather than prospective prediction.",
+        "No independent external cohort or later untouched deployment dataset was available.",
+        "Probability calibration did not provide a reliable four-class hard-decision improvement.",
+        "Returned probabilities are raw uncalibrated model scores and must not be interpreted as validated confidence estimates.",
+        "The training households contained 15 to 25 observed billing months. Predictions outside this coverage range are not validated."
+    ]
+}
